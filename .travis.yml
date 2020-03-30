@@ -1,0 +1,33 @@
+language: rust
+
+sudo: required
+
+rust:
+  - 1.42.0
+
+branches:
+  only:
+    - test-ci
+
+addons:
+  apt:
+    packages:
+      - ca-certificates
+      - file
+      - build-essential
+      - autconf
+      - automake
+      - autotools-dev
+      - libtool
+      - xutiils-dev
+      - cmake
+      - pkg-config
+      - libfreetype6-dev
+      - libfontconfig1-dev
+      - xclip
+
+env:
+  - TEST_DIR=engine
+
+script: 
+  - cd $TEST_DIR && cargo build --verbose --all && cargo test --verbose --all
