@@ -15,11 +15,11 @@ addons:
       - ca-certificates
       - file
       - build-essential
-      - autconf
+      - autoconf
       - automake
       - autotools-dev
       - libtool
-      - xutiils-dev
+      - xutils-dev
       - cmake
       - pkg-config
       - libfreetype6-dev
