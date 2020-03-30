@@ -28,6 +28,19 @@ addons:
 
 env:
   - TEST_DIR=engine
+  - TEST_DIR=web
+  - TEST_DIR=server
+
+install:
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 12.16
+  - npm install yarn
+
+before_script:
+  - cd $TEST_DIR && cargo build --verbose --all
+  - cd $TEST_DIR && yarn install
+  - cd $TEST_DIR && npm install 
 
 script: 
-  - cd $TEST_DIR && cargo build --verbose --all && cargo test --verbose --all
+  - cargo test --verbose --all
+  - yarn test --watchAll=false
+  - npm run test 
