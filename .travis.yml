@@ -35,12 +35,7 @@ install:
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 12.16
   - npm install yarn
 
-before_script:
-  - cd $TEST_DIR && cargo build --verbose --all
-  - cd $TEST_DIR && yarn install
-  - cd $TEST_DIR && npm install 
-
 script: 
-  - cargo test --verbose --all
-  - yarn test --watchAll=false
-  - npm run test 
+  - cd $TRAVIS_BUILD_DIR/$TEST_DIR && cargo build --verbose --all && cargo test --verbose --all
+  - cd $TRAVIS_BUILD_DIR/$TEST_DIR && yarn install && yarn test --watchAll=false
+  - cd $TRAVIS_BUILD_DIR/$TEST_DIR && npm install && npm run test 
